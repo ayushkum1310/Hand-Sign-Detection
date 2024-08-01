@@ -1,30 +1,42 @@
-# -*- coding: utf-8 -*-
-import click
-import logging
+import os
+import sys
+import zipfile
+from src.logger import logging
+from src.exception import CustomException
 from pathlib import Path
-from dotenv import find_dotenv, load_dotenv
+from dataclasses import dataclass
+from dotenv import load_dotenv
+load_dotenv()
+
+os.environ['KAGGLE_USERNAME'] = os.getenv('KAGGLE_USERNAME')
+os.environ['KAGGLE_KEY'] = os.getenv('KAGGLE_KEY')
+
+@dataclass
+class Dataingestionconfig:
+    raw_data_path:Path=Path('data/raw')
+    processed_data_path:Path=Path('data/processes')
+    
 
 
-@click.command()
-@click.argument('input_filepath', type=click.Path(exists=True))
-@click.argument('output_filepath', type=click.Path())
-def main(input_filepath, output_filepath):
-    """ Runs data processing scripts to turn raw data from (../raw) into
-        cleaned data ready to be analyzed (saved in ../processed).
-    """
-    logger = logging.getLogger(__name__)
-    logger.info('making final data set from raw data')
+class DataIngestion:
+    def __init__(self) :
+        self.ingestion_confi=Dataingestionconfig()
+        
+    def initiate_data_injestion(self):
+        logging.info("Data injestion has Started")
+        try:
+            logging.info('Checking existance')
+            path=self.ingestion_confi.raw_data_path
+            # os.system(f"kaggle datasets download -d kapillondhe/american-sign-language -p {path}")
+            with zipfile.ZipFile(Path('data/raw/american-sign-language.zip'),'r') as zip_:
+                zip_.extractall(self.ingestion_confi.processed_data_path)
+            return self.ingestion_confi.processed_data_path
+        except Exception as e:
+            raise CustomException(e,sys)
+            
+
+if __name__=="__main__":
+    a=DataIngestion().initiate_data_injestion()
 
 
-if __name__ == '__main__':
-    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    logging.basicConfig(level=logging.INFO, format=log_fmt)
 
-    # not used in this stub but often useful for finding various files
-    project_dir = Path(__file__).resolve().parents[2]
-
-    # find .env automagically by walking up directories until it's found, then
-    # load up the .env entries as environment variables
-    load_dotenv(find_dotenv())
-
-    main()

@@ -1,5 +1,7 @@
 # local package
 plaidml-keras plaidbench
+kaggle
+python-dotenv
 
 -e .
 
