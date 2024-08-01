@@ -1,5 +1,5 @@
 # local package
-pip install plaidml-keras plaidbench
+plaidml-keras plaidbench
 
 -e .
 
