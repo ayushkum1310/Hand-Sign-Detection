@@ -1,57 +1,36 @@
 Hand Sign Detection
 ==============================
 
-na
+This project focuses on developing a neural network-based model to classify American Sign Language (ASL) hand signs. The goal is to build an effective image classification system that can accurately identify ASL alphabets from images of hand signs.
 
-Project Organization
-------------
+Key Components:
 
-    ├── LICENSE
-    ├── Makefile           <- Makefile with commands like `make data` or `make train`
-    ├── README.md          <- The top-level README for developers using this project.
-    ├── data
-    │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
-    │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
-    │
-    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
-    │
-    ├── models             <- Trained and serialized models, model predictions, or model summaries
-    │
-    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-    │                         the creator's initials, and a short `-` delimited description, e.g.
-    │                         `1.0-jqp-initial-data-exploration`.
-    │
-    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-    │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │   └── figures        <- Generated graphics and figures to be used in reporting
-    │
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-    │                         generated with `pip freeze > requirements.txt`
-    │
-    ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
-    ├── src                <- Source code for use in this project.
-    │   ├── __init__.py    <- Makes src a Python module
-    │   │
-    │   ├── data           <- Scripts to download or generate data
-    │   │   └── make_dataset.py
-    │   │
-    │   ├── features       <- Scripts to turn raw data into features for modeling
-    │   │   └── build_features.py
-    │   │
-    │   ├── models         <- Scripts to train models and then use trained models to make
-    │   │   │                 predictions
-    │   │   ├── predict_model.py
-    │   │   └── train_model.py
-    │   │
-    │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
-    │       └── visualize.py
-    │
-    └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
+Data Collection:
+
+The dataset consists of colored images representing different ASL alphabets. The images are organized into directories corresponding to each class.
+Data Preprocessing:
+
+Data Augmentation: To improve model generalization, the training images are augmented through techniques such as rotation, shifting, zooming, and flipping. This helps the model learn from a diverse set of examples.
+Rescaling: Pixel values are normalized to the range [0, 1] for both training and testing data to ensure consistent input to the neural network.
+Model Architecture:
+
+Base Model: Utilizes a pre-trained VGG16 model (without the top classification layers) to leverage learned features from a large dataset.
+Custom Layers: Adds custom layers on top of VGG16, including a Flatten layer, a dense layer with 512 units, and a final dense layer with 28 units (one for each ASL alphabet) with softmax activation for classification.
+Model Training:
+
+The model is compiled using the Adam optimizer and sparse categorical cross-entropy loss function. It is then trained on the augmented training data and validated using the testing data over a specified number of epochs.
+Model Evaluation:
+
+After training, the model is evaluated on the test dataset to assess its accuracy in classifying unseen hand sign images.
+Model Deployment:
+
+The trained model is saved for future use and can be loaded to make predictions on new images.
+Prediction:
+
+For making predictions, new images are preprocessed (resized and normalized) before being fed into the model. The model outputs probabilities for each class, and the class with the highest probability is selected as the predicted ASL alphabet.
+This project aims to enhance communication for those who use ASL by providing an automated tool to recognize and translate hand signs into corresponding letters.
 
 
---------
+
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
