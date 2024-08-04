@@ -1,57 +1,88 @@
-Hand Sign Detection
-==============================
-
-na
-
-Project Organization
-------------
-
-    ├── LICENSE
-    ├── Makefile           <- Makefile with commands like `make data` or `make train`
-    ├── README.md          <- The top-level README for developers using this project.
-    ├── data
-    │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
-    │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
-    │
-    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
-    │
-    ├── models             <- Trained and serialized models, model predictions, or model summaries
-    │
-    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-    │                         the creator's initials, and a short `-` delimited description, e.g.
-    │                         `1.0-jqp-initial-data-exploration`.
-    │
-    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-    │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │   └── figures        <- Generated graphics and figures to be used in reporting
-    │
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-    │                         generated with `pip freeze > requirements.txt`
-    │
-    ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
-    ├── src                <- Source code for use in this project.
-    │   ├── __init__.py    <- Makes src a Python module
-    │   │
-    │   ├── data           <- Scripts to download or generate data
-    │   │   └── make_dataset.py
-    │   │
-    │   ├── features       <- Scripts to turn raw data into features for modeling
-    │   │   └── build_features.py
-    │   │
-    │   ├── models         <- Scripts to train models and then use trained models to make
-    │   │   │                 predictions
-    │   │   ├── predict_model.py
-    │   │   └── train_model.py
-    │   │
-    │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
-    │       └── visualize.py
-    │
-    └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
 
 
---------
+# ASL Hand Sign Classification
 
-<p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
+This project involves creating a neural network-based model to classify American Sign Language (ASL) hand signs from images. The objective is to develop an effective image classification system capable of accurately identifying ASL alphabets.
+
+## Table of Contents
+
+1. [Introduction](#introduction)
+2. [Dataset](#dataset)
+3. [Installation](#installation)
+4. [Usage](#usage)
+5. [Model Architecture](#model-architecture)
+6. [Training](#training)
+7. [Evaluation](#evaluation)
+8. [Predictions](#predictions)
+9. [License](#license)
+
+## Introduction
+
+This project uses deep learning techniques to classify hand signs in American Sign Language. By leveraging a pre-trained VGG16 model and adding custom layers, the system can recognize and classify ASL alphabets from images.
+
+## Dataset
+
+- **Source:** The dataset consists of colored images of hand signs representing different ASL alphabets.
+- **Structure:** Images are organized into directories, each corresponding to a specific ASL alphabet class.
+
+## Installation
+
+To set up the project environment, follow these steps:
+
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/ayushkum1310/Hand-Sign-Detection.git
+    cd Hand-Sign-Detection
+    ```
+
+2. Install the required dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+## Usage
+
+1. **Prepare Data:**
+   - Place your dataset in the `ASL_Dataset` directory with subdirectories for training and testing images.
+
+2. **Run the Script:**
+   - Execute the training script to train the model:
+     ```bash
+     python .\src\models\train_model.py
+     ```
+
+3. **Make Predictions:**
+   - Use the trained model to make predictions on new images:
+     ```bash
+     python .\src\modeld\prediction.py
+     ```
+
+## Model Architecture
+
+- **Base Model:** Pre-trained VGG16 (excluding top layers) with weights from ImageNet.
+- **Custom Layers:** 
+  - Flatten layer to convert features to 1D.
+  - Dense layer with 512 units and ReLU activation.
+  - Dense layer with 28 units and softmax activation for classification.
+
+## Training
+
+- **Optimizer:** Adam
+- **Loss Function:** Sparse categorical cross-entropy
+- **Metrics:** Accuracy
+- **Epochs:** Specify the number of epochs in the training script.
+
+## Evaluation
+
+The model is evaluated on a separate test dataset to measure its classification accuracy. The evaluation script can be used to assess performance after training.
+
+## Predictions
+
+- **Preprocessing:** Images are resized to 64x64 pixels and normalized before prediction.
+- **Output:** The model provides probabilities for each ASL alphabet class, with the highest probability indicating the predicted class.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+
