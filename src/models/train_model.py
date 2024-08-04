@@ -104,5 +104,5 @@ class Model_trainer:
             logging.error(f"An error occurred: {str(e)}")
             raise CustomException(e, sys)
         
-if __name__=="__main__":
-    a=Model_trainer().initiate_model_trainer()
+# if __name__=="__main__":
+#     a=Model_trainer().initiate_model_trainer()

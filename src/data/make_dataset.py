@@ -27,16 +27,16 @@ class DataIngestion:
         try:
             logging.info('Checking existance')
             path=self.ingestion_confi.raw_data_path
-            # os.system(f"kaggle datasets download -d kapillondhe/american-sign-language -p {path}")
-            # with zipfile.ZipFile(Path('data/raw/american-sign-language.zip'),'r') as zip_:
-            #     zip_.extractall(self.ingestion_confi.processed_data_path)
+            os.system(f"kaggle datasets download -d kapillondhe/american-sign-language -p {path}")
+            with zipfile.ZipFile(Path('data/raw/american-sign-language.zip'),'r') as zip_:
+                zip_.extractall(self.ingestion_confi.processed_data_path)
             return self.ingestion_confi.processed_data_path
         except Exception as e:
             raise CustomException(e,sys)
             
 
-# if __name__=="__main__":
-#     a=DataIngestion().initiate_data_injestion()
+if __name__=="__main__":
+    a=DataIngestion().initiate_data_injestion()
 
 
 

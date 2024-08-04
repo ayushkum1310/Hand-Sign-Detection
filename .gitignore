@@ -64,6 +64,7 @@ target/
 *.rdb
 /data/processes/ASL_Dataset/Train/
 /data/raw/
+models/model (1).h5
 # Pycharm
 .idea
 

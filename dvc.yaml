@@ -1,0 +1,29 @@
+stages:
+  make_dataset:
+    cmd: python src\data\make_dataset.py
+    deps:
+      - src\data\make_dataset.py
+      - src\exception.py
+      - src\logger.py
+      
+    outs:
+      - data\raw\american-sign-language.zip
+      - data\processes\ASL_Dataset\Test
+      - data\processes\ASL_Dataset\Train
+  
+  model_training:
+    cmd: python src\Disease_classification\components\model_tranier.py
+    deps:
+      - src\Disease_classification\components\model_tranier.py
+      - src\exception.py
+      - data\processes
+      - src\logger.py
+    outs:
+      - amodels\model (1).h5
+
+
+
+  
+      
+
+ 

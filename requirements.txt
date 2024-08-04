@@ -1,6 +1,11 @@
 # local package
-plaidml-keras plaidbench
+# plaidml-keras plaidbench
+mlflow
+dvc
+tensorflow
+opencv-python
 kaggle
+dagshub
 python-dotenv
 
 -e .
