@@ -62,7 +62,8 @@ target/
 # Database
 *.db
 *.rdb
-
+/data/processes/ASL_Dataset/Train/
+/data/raw/
 # Pycharm
 .idea
 
@@ -77,8 +78,8 @@ target/
 .ipynb_checkpoints/
 
 # exclude data from source control by default
-/data/
 
+/model (1).h5
 # Mac OS-specific storage files
 .DS_Store
 
