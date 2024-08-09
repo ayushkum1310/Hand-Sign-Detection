@@ -62,7 +62,7 @@ target/
 # Database
 *.db
 *.rdb
-/data/processes/ASL_Dataset/Train/
+/data/processes
 /data/raw/
 models/model (1).h5
 # Pycharm

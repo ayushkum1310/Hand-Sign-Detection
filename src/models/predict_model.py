@@ -1,7 +1,6 @@
 import os
 import sys
-from src.logger import logging
-from src.exception import CustomException
+
 import cv2
 import numpy as np
 from pathlib import Path
